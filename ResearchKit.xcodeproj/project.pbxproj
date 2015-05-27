@@ -27,6 +27,10 @@
 		618DA0521A93D0D600E63AA8 /* ORKAccessibilityFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 618DA04A1A93D0D600E63AA8 /* ORKAccessibilityFunctions.m */; };
 		618DA0541A93D0D600E63AA8 /* UIView+ORKAccessibility.h in Headers */ = {isa = PBXBuildFile; fileRef = 618DA04B1A93D0D600E63AA8 /* UIView+ORKAccessibility.h */; };
 		618DA0561A93D0D600E63AA8 /* UIView+ORKAccessibility.m in Sources */ = {isa = PBXBuildFile; fileRef = 618DA04C1A93D0D600E63AA8 /* UIView+ORKAccessibility.m */; };
+		676EE1BE1B164AFA002217BB /* ORKConcussionReverseMemoryStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676EE1BD1B164AFA002217BB /* ORKConcussionReverseMemoryStep.swift */; };
+		676EE1C01B164D4B002217BB /* ORKConcussionReverseMemoryStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676EE1BF1B164D4B002217BB /* ORKConcussionReverseMemoryStepViewController.swift */; };
+		676EE1C21B16535F002217BB /* ORKConcussionReverseMemoryActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676EE1C11B16535F002217BB /* ORKConcussionReverseMemoryActivity.swift */; };
+		676EE1C41B16578C002217BB /* ORKConcussionReverseMemorySequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676EE1C31B16578C002217BB /* ORKConcussionReverseMemorySequence.swift */; };
 		861D11A91AA691BB003C98A7 /* ORKScaleSliderView.h in Headers */ = {isa = PBXBuildFile; fileRef = 861D11A71AA691BB003C98A7 /* ORKScaleSliderView.h */; };
 		861D11AA1AA691BB003C98A7 /* ORKScaleSliderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 861D11A81AA691BB003C98A7 /* ORKScaleSliderView.m */; };
 		861D11AD1AA7951F003C98A7 /* ORKChoiceAnswerFormatHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 861D11AB1AA7951F003C98A7 /* ORKChoiceAnswerFormatHelper.h */; };
@@ -368,6 +372,10 @@
 		618DA04A1A93D0D600E63AA8 /* ORKAccessibilityFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKAccessibilityFunctions.m; sourceTree = "<group>"; };
 		618DA04B1A93D0D600E63AA8 /* UIView+ORKAccessibility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = "UIView+ORKAccessibility.h"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		618DA04C1A93D0D600E63AA8 /* UIView+ORKAccessibility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = "UIView+ORKAccessibility.m"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		676EE1BD1B164AFA002217BB /* ORKConcussionReverseMemoryStep.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ORKConcussionReverseMemoryStep.swift; sourceTree = "<group>"; };
+		676EE1BF1B164D4B002217BB /* ORKConcussionReverseMemoryStepViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ORKConcussionReverseMemoryStepViewController.swift; sourceTree = "<group>"; };
+		676EE1C11B16535F002217BB /* ORKConcussionReverseMemoryActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ORKConcussionReverseMemoryActivity.swift; sourceTree = "<group>"; };
+		676EE1C31B16578C002217BB /* ORKConcussionReverseMemorySequence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ORKConcussionReverseMemorySequence.swift; sourceTree = "<group>"; };
 		861610BF1A8D8EDD00245F7A /* Artwork.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Artwork.xcassets; sourceTree = "<group>"; };
 		861D11A71AA691BB003C98A7 /* ORKScaleSliderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKScaleSliderView.h; sourceTree = "<group>"; };
 		861D11A81AA691BB003C98A7 /* ORKScaleSliderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKScaleSliderView.m; sourceTree = "<group>"; };
@@ -790,6 +798,17 @@
 			path = Accessibility;
 			sourceTree = "<group>";
 		};
+		676EE1BC1B16485B002217BB /* Concussion Reverse Memory */ = {
+			isa = PBXGroup;
+			children = (
+				676EE1BD1B164AFA002217BB /* ORKConcussionReverseMemoryStep.swift */,
+				676EE1BF1B164D4B002217BB /* ORKConcussionReverseMemoryStepViewController.swift */,
+				676EE1C11B16535F002217BB /* ORKConcussionReverseMemoryActivity.swift */,
+				676EE1C31B16578C002217BB /* ORKConcussionReverseMemorySequence.swift */,
+			);
+			name = "Concussion Reverse Memory";
+			sourceTree = "<group>";
+		};
 		86B623AF19520B770074CD3C /* ResearchKit */ = {
 			isa = PBXGroup;
 			children = (
@@ -811,6 +830,7 @@
 		86C40AF91A8D7C5B00081FAC /* ActiveTasks */ = {
 			isa = PBXGroup;
 			children = (
+				676EE1BC1B16485B002217BB /* Concussion Reverse Memory */,
 				B12EFF4F1AB2165B00A80147 /* Common */,
 				B12EFF4E1AB2161500A80147 /* Audio */,
 				B12EFF5D1AB2177700A80147 /* Fitness */,
@@ -1928,6 +1948,7 @@
 			files = (
 				86C40C341A8D7C5C00081FAC /* ORKFitnessStepViewController.m in Sources */,
 				86C40E2E1A8D7C5C00081FAC /* ORKVisualConsentStep.m in Sources */,
+				676EE1BE1B164AFA002217BB /* ORKConcussionReverseMemoryStep.swift in Sources */,
 				86C40CA61A8D7C5C00081FAC /* ORKLocationRecorder.m in Sources */,
 				86C40CB61A8D7C5C00081FAC /* ORKTouchRecorder.m in Sources */,
 				86C40DC41A8D7C5C00081FAC /* ORKTapCountLabel.m in Sources */,
@@ -1965,7 +1986,9 @@
 				866F86011A96CBF3007B282C /* ORKSurveyAnswerCell.m in Sources */,
 				86C40E321A8D7C5C00081FAC /* ORKVisualConsentStepViewController.m in Sources */,
 				618DA0561A93D0D600E63AA8 /* UIView+ORKAccessibility.m in Sources */,
+				676EE1C21B16535F002217BB /* ORKConcussionReverseMemoryActivity.swift in Sources */,
 				86C40D3A1A8D7C5C00081FAC /* ORKHTMLPDFWriter.m in Sources */,
+				676EE1C01B164D4B002217BB /* ORKConcussionReverseMemoryStepViewController.swift in Sources */,
 				865EA1691ABA1AA10037C68E /* ORKPicker.m in Sources */,
 				86C40D321A8D7C5C00081FAC /* ORKHealthAnswerFormat.m in Sources */,
 				86C40D861A8D7C5C00081FAC /* ORKSelectionTitleLabel.m in Sources */,
@@ -1980,6 +2003,7 @@
 				86C40C2C1A8D7C5C00081FAC /* ORKFitnessContentView.m in Sources */,
 				86C40E1A1A8D7C5C00081FAC /* ORKConsentSection.m in Sources */,
 				86C40C241A8D7C5C00081FAC /* ORKCountdownStep.m in Sources */,
+				676EE1C41B16578C002217BB /* ORKConcussionReverseMemorySequence.swift in Sources */,
 				86C40CA21A8D7C5C00081FAC /* ORKHealthQuantityTypeRecorder.m in Sources */,
 				86C40DC01A8D7C5C00081FAC /* ORKTableViewCell.m in Sources */,
 				86C40C681A8D7C5C00081FAC /* CMAccelerometerData+ORKJSONDictionary.m in Sources */,
@@ -2241,6 +2265,7 @@
 		B183A5931A8535D100C76870 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEAD_CODE_STRIPPING = YES;
@@ -2259,17 +2284,20 @@
 				INFOPLIST_FILE = "$(SRCROOT)/ResearchKit/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = ResearchKit/module.modulemap;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_NAME = ResearchKit;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		B183A5941A8535D100C76870 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEAD_CODE_STRIPPING = YES;
@@ -2285,6 +2313,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/ResearchKit/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = ResearchKit/module.modulemap;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = ResearchKit;
