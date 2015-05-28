@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 
+
 public class ORKConcussionReverseMemoryStepViewController : ORKActiveStepViewController
 {
     override init(step: ORKStep?) {
@@ -49,5 +50,14 @@ public class ORKConcussionReverseMemoryStepViewController : ORKActiveStepViewCon
         
     }
     
+    private func configureAppearance()
+    {
+        //configure title
+        
+        
+        //configure description
+        //configure numerical display tile
+        
+    }
     
 }

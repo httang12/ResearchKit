@@ -14,13 +14,13 @@ public class ORKConcussionReverseMemoryStep : ORKActiveStep
     var retries: Int = 0
     
     //sequence associated with the step
-    var sequence: ORKConcussionReverseMemorySequence!
+    var activity: ORKConcussionReverseMemoryActivity!
     
     //initialization with ID and sequence
-    init(identifier:String ,sequence: ORKConcussionReverseMemorySequence)
+    init(identifier:String ,activity: ORKConcussionReverseMemoryActivity)
     {
         super.init(identifier: identifier)
-        self.sequence = sequence
+        self.activity = activity
     }
 
     required public init(coder aDecoder: NSCoder) {
