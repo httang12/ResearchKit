@@ -58,25 +58,36 @@ public class ORKConcussionReverseMemoryContentView : UIView
         */
         //add sequence display
         sequenceDisplay = UILabel()
-        sequenceDisplay.frame = CGRectMake(20, 0, 330, 275)
-
+        sequenceDisplay.frame = CGRectMake(20, 0, 330, 330)
+        
+        
+        sequenceDisplay.lineBreakMode = NSLineBreakMode.ByWordWrapping
+        sequenceDisplay.numberOfLines = 0
+        
         sequenceDisplay.textColor = UIColor.whiteColor()
         sequenceDisplay.textAlignment = NSTextAlignment.Center
         sequenceDisplay.text = ""
         sequenceDisplay.layer.cornerRadius = 8
         sequenceDisplay.textColor = UIColor.blackColor()
-        //sequenceDisplay.layer.borderColor = UIColor.greenColor().CGColor
-        //sequenceDisplay.layer.borderWidth = 5.0
+        sequenceDisplay.layer.borderColor = UIColor.grayColor().CGColor
+        sequenceDisplay.layer.borderWidth = 1.0
         sequenceDisplay.font = UIFont.systemFontOfSize(120.0)
         self.addSubview(sequenceDisplay)
         
-        inputField = UITextField()
-        inputField.frame = CGRectMake(20, 0, 330, 150)
+        inputField = ORKConcussionReverseMemoryTextField()
+        inputField.frame = CGRectMake(20, 50, 330, 150)
         inputField.keyboardType = UIKeyboardType.NumberPad
         inputField.font = UIFont.systemFontOfSize(80.0)
-        
+        inputField.layer.borderColor = UIColor.grayColor().CGColor
+        inputField.layer.borderWidth = 1.0
+        inputField.textAlignment = NSTextAlignment.Center
+        inputField.layer.cornerRadius = 8
         self.addSubview(inputField)
+        
         inputField.hidden=true
+        inputField.selectedTextRange = nil
+        //setup toolbar for key action
+        
         /*
         //add description bottom under sequence display
         description_bottom = UILabel()
@@ -113,9 +124,9 @@ public class ORKConcussionReverseMemoryContentView : UIView
     }
     
     //set the number display
-    func updateDisplayNum(number: Int)
+    func updateDisplayNum(number: String)
     {
-        NSLog("display number:" + NSInteger(number).description)
-        self.sequenceDisplay.text = NSInteger(number).description
+
+        self.sequenceDisplay.text = number
     }
 }

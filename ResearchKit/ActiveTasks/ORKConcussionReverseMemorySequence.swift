@@ -12,7 +12,7 @@ import Foundation
 public class ORKConcussionReverseMemorySequence : NSObject
 {
     //array holds the sequence values
-    var sequence: [Int] = [Int]()
+    var sequence: [String] = [String]()
     
     init(size:Int)
     {
@@ -25,7 +25,7 @@ public class ORKConcussionReverseMemorySequence : NSObject
         //quick for loop
         for index in 1 ... size
         {
-            sequence.append(NSInteger(arc4random_uniform(10)))
+            sequence.append(NSInteger(arc4random_uniform(10)).description)
         }
     }
 }

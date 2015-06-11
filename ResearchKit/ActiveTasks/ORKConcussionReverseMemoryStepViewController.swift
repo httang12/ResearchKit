@@ -38,7 +38,7 @@ public class ORKConcussionReverseMemoryStepViewController: ORKActiveStepViewCont
 
         self.customView = self.contentView
         self.startActivity()
-        
+        self.contentView.inputField.addTarget(self, action: "inputValueChanged", forControlEvents: UIControlEvents.EditingChanged)
         /*
         self.contentView = ORKConcussionReverseMemoryContentView(frame: CGRectMake(0, 0, 500, 750))
         self.contentView = contentView as UIView
@@ -94,6 +94,19 @@ public class ORKConcussionReverseMemoryStepViewController: ORKActiveStepViewCont
        
     }
     
+    private func proceedToNextActivity()
+    {
+        self.sequenceIndex += 1
+        
+    }
+    
+    private func retryCurrentActivity()
+    {
+        self.startActivity()
+    }
+    
+    
+    
     func updateSequenceDisplay()
     {
         //get the sequence from game config
@@ -120,9 +133,9 @@ public class ORKConcussionReverseMemoryStepViewController: ORKActiveStepViewCont
             {
                 displayTimer.invalidate()
                 //show keyboard
-                self.contentView.inputField.hidden=false
+                //self.contentView.inputField.hidden=false
                 self.contentView.inputField.becomeFirstResponder()
-                self.contentView.sequenceDisplay.hidden=true
+                //self.contentView.sequenceDisplay.hidden=true
             }
         }
     
@@ -162,6 +175,44 @@ public class ORKConcussionReverseMemoryStepViewController: ORKActiveStepViewCont
         
         //configure numerical display tile
         
+    }
+    
+    //action performed when the numeric input field changed
+    func inputValueChanged()
+    {
+        //get the sequence from game config
+        let step = self.step as! ORKConcussionReverseMemoryStep
+        let activity = step.activity
+        
+        self.contentView.sequenceDisplay.text = self.contentView.inputField.text
+        
+        var joinString = ""
+        
+        var inputString = self.contentView.inputField.text
+        let reverseSequenceString = joinString.join(activity.memorySequence[sequenceIndex].sequence.reverse())
+        
+        if (count(inputString) == count(reverseSequenceString))
+        {
+            var validated = self.validateString(inputString,reverseSequenceString: reverseSequenceString)
+            if (!validated)
+            {
+                self.retryCurrentActivity()
+            }
+            else
+            {
+                self.proceedToNextActivity()
+            }
+        }
+    }
+    
+    func validateString(value: String, reverseSequenceString: String) -> Bool
+    {
+        if (reverseSequenceString == value)
+        {
+            return true
+        }
+        
+        return false
     }
     
 }
