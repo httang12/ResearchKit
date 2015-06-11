@@ -46,7 +46,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic, strong, readonly, nullable) UIView *customViewContainer;
 
-@property (nonatomic, strong, readonly, nullable) ORKActiveStepView *activeStepView;
+@property (nonatomic, strong, nullable) ORKActiveStepView *activeStepView;
 
 @property (nonatomic, readonly) NSTimeInterval timeRemaining;
 @property (nonatomic, readonly) BOOL timerActive;

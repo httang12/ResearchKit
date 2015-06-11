@@ -25,7 +25,7 @@ public class ORKConcussionReverseMemorySequence : NSObject
         //quick for loop
         for index in 1 ... size
         {
-            sequence.append(NSInteger(arc4random()))
+            sequence.append(NSInteger(arc4random_uniform(10)))
         }
     }
 }

@@ -82,6 +82,7 @@ ORK_CLASS_AVAILABLE
  */
 @property (nonatomic, strong, nullable) UIView *customView;
 
+
 /**
  The image view for the active step. (read-only)
  
@@ -257,6 +258,16 @@ ORK_CLASS_AVAILABLE
  Subclasses may override this method, but must also call super.
  */
 - (void)prepareStep;
+
+/**
+ method for retrieving active step view
+ **/
+- (UIView *)getActiveStepView;
+
+/**
+ method for setting active step view
+ **/
+- (void)setActiveStepView: (UIView *) contentView;
 
 @end
 

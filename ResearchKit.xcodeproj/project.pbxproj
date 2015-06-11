@@ -28,6 +28,7 @@
 		618DA0541A93D0D600E63AA8 /* UIView+ORKAccessibility.h in Headers */ = {isa = PBXBuildFile; fileRef = 618DA04B1A93D0D600E63AA8 /* UIView+ORKAccessibility.h */; };
 		618DA0561A93D0D600E63AA8 /* UIView+ORKAccessibility.m in Sources */ = {isa = PBXBuildFile; fileRef = 618DA04C1A93D0D600E63AA8 /* UIView+ORKAccessibility.m */; };
 		670C8FDF1B18B3B200A63F43 /* ORKConcussionReverseMemoryContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 670C8FDE1B18B3B200A63F43 /* ORKConcussionReverseMemoryContentView.swift */; };
+		6713D8841B27FB71004D4F60 /* ORKOrderedTask_Concussion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6713D8831B27FB71004D4F60 /* ORKOrderedTask_Concussion.swift */; };
 		676EE1BE1B164AFA002217BB /* ORKConcussionReverseMemoryStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676EE1BD1B164AFA002217BB /* ORKConcussionReverseMemoryStep.swift */; };
 		676EE1C01B164D4B002217BB /* ORKConcussionReverseMemoryStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676EE1BF1B164D4B002217BB /* ORKConcussionReverseMemoryStepViewController.swift */; };
 		676EE1C21B16535F002217BB /* ORKConcussionReverseMemoryActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676EE1C11B16535F002217BB /* ORKConcussionReverseMemoryActivity.swift */; };
@@ -374,6 +375,7 @@
 		618DA04B1A93D0D600E63AA8 /* UIView+ORKAccessibility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = "UIView+ORKAccessibility.h"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		618DA04C1A93D0D600E63AA8 /* UIView+ORKAccessibility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = "UIView+ORKAccessibility.m"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		670C8FDE1B18B3B200A63F43 /* ORKConcussionReverseMemoryContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ORKConcussionReverseMemoryContentView.swift; sourceTree = "<group>"; };
+		6713D8831B27FB71004D4F60 /* ORKOrderedTask_Concussion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ORKOrderedTask_Concussion.swift; sourceTree = "<group>"; };
 		676EE1BD1B164AFA002217BB /* ORKConcussionReverseMemoryStep.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ORKConcussionReverseMemoryStep.swift; sourceTree = "<group>"; };
 		676EE1BF1B164D4B002217BB /* ORKConcussionReverseMemoryStepViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ORKConcussionReverseMemoryStepViewController.swift; sourceTree = "<group>"; };
 		676EE1C11B16535F002217BB /* ORKConcussionReverseMemoryActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ORKConcussionReverseMemoryActivity.swift; sourceTree = "<group>"; };
@@ -982,6 +984,7 @@
 				86C40BD81A8D7C5C00081FAC /* ORKTaskViewController.m */,
 				86C40BD91A8D7C5C00081FAC /* ORKTaskViewController_Internal.h */,
 				86C40BDA1A8D7C5C00081FAC /* ORKTaskViewController_Private.h */,
+				6713D8831B27FB71004D4F60 /* ORKOrderedTask_Concussion.swift */,
 			);
 			name = Task;
 			sourceTree = "<group>";
@@ -2016,6 +2019,7 @@
 				86C40D901A8D7C5C00081FAC /* ORKStep.m in Sources */,
 				86C40D2E1A8D7C5C00081FAC /* ORKHeadlineLabel.m in Sources */,
 				86C40CFC1A8D7C5C00081FAC /* ORKCaption1Label.m in Sources */,
+				6713D8841B27FB71004D4F60 /* ORKOrderedTask_Concussion.swift in Sources */,
 				86C40E001A8D7C5C00081FAC /* ORKConsentDocument.m in Sources */,
 				86C40CDE1A8D7C5C00081FAC /* ORKTintedImageView.m in Sources */,
 				86B781BC1AA668ED00688151 /* ORKTimeIntervalPicker.m in Sources */,

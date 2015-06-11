@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import ResearchKit.Private
 
 public class ORKConcussionReverseMemoryStep : ORKActiveStep
 {
@@ -21,6 +22,9 @@ public class ORKConcussionReverseMemoryStep : ORKActiveStep
     {
         super.init(identifier: identifier)
         self.activity = activity
+        self.title = "Watch the sequence of number on screen."
+        self.stepDuration = 30.0
+        self.shouldContinueOnFinish = true
     }
 
     required public init(coder aDecoder: NSCoder) {
@@ -29,5 +33,21 @@ public class ORKConcussionReverseMemoryStep : ORKActiveStep
     
     override public func encodeWithCoder(aCoder: NSCoder) {
         //put property encoding here
+    }
+    
+    static func stepViewControllerClass() -> AnyClass
+    {
+        return ORKConcussionReverseMemoryStepViewController.classForCoder()
+    }
+    
+    override public func copyWithZone(zone: NSZone) -> AnyObject {
+        var copy:ORKConcussionReverseMemoryStep = super.copyWithZone(zone) as! ORKConcussionReverseMemoryStep
+        copy.retries = self.retries
+        
+        return copy
+    }
+    
+    override public func validateParameters() {
+        //validate the parameters passed to the step
     }
 }
