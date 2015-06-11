@@ -11,7 +11,9 @@ import UIKit
 
 public class ORKConcussionReverseMemoryTextField : UITextField
 {
+
     override public func caretRectForPosition(position: UITextPosition!) -> CGRect {
         return CGRect.zeroRect
     }
+    
 }

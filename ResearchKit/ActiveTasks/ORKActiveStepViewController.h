@@ -32,7 +32,6 @@
 #import <ResearchKit/ORKStepViewController.h>
 #import <ResearchKit/ORKRecorder.h>
 
-
 NS_ASSUME_NONNULL_BEGIN
 
 
@@ -259,15 +258,6 @@ ORK_CLASS_AVAILABLE
  */
 - (void)prepareStep;
 
-/**
- method for retrieving active step view
- **/
-- (UIView *)getActiveStepView;
-
-/**
- method for setting active step view
- **/
-- (void)setActiveStepView: (UIView *) contentView;
 
 @end
 

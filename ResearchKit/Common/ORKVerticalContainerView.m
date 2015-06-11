@@ -169,8 +169,9 @@ static const CGFloat AssumedStatusBarHeight = 20;
     }
     
     if (! viewIsChildOfFirstResponder) {
-        
+     
         [self endEditing:NO];
+
     }
     
 }

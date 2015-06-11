@@ -512,16 +512,6 @@ static NSString * const _ORKRecorderResultsRestoreKey = @"recorderResults";
     _recorderResults = [coder decodeObjectOfClass:[NSArray class] forKey:_ORKRecorderResultsRestoreKey];
 }
 
-- (UIView *)getActiveStepView
-{
-    return _activeStepView;
-}
-
-- (void)setActiveStepView: (ORKActiveStepView *) contentView
-{
-    _activeStepView = contentView;
-}
-
 
 
 @end

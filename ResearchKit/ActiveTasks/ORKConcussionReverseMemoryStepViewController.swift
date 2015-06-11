@@ -32,22 +32,29 @@ public class ORKConcussionReverseMemoryStepViewController: ORKActiveStepViewCont
     }
 
     override public func viewDidLoad() {
+        
         NSLog("append view...")
         super.viewDidLoad()
         self.contentView = (ORKConcussionReverseMemoryContentView(frame: CGRectMake(0, 0, 500, 350)))
 
         self.customView = self.contentView
+         NSLog("start position:" + self.view.center.x.description + "-" + self.view.center.y.description)
         self.startActivity()
         self.contentView.inputField.addTarget(self, action: "inputValueChanged", forControlEvents: UIControlEvents.EditingChanged)
-        /*
-        self.contentView = ORKConcussionReverseMemoryContentView(frame: CGRectMake(0, 0, 500, 750))
-        self.contentView = contentView as UIView
-        self.view = self.contentView
         
-        //register button on view with action
-        //add action
-        self.contentView.actionButton.addTarget(self, action: "actionButtonPressed:", forControlEvents: .TouchUpInside)
-        */
+        //remove the parent gesture recognizer... they are not needed
+        var allViews = self.view.subviews as! [UIView]
+        
+        NSLog("SViews:" + self.view.subviews.description)
+        
+        for subview: UIView in allViews {
+            NSLog(subview.description)
+            if let recognizers = subview.gestureRecognizers {
+                for recognizer in recognizers {
+                    subview.removeGestureRecognizer(recognizer as! UIGestureRecognizer)
+                }
+            }
+        }
     }
     
     //handle button action
@@ -67,6 +74,7 @@ public class ORKConcussionReverseMemoryStepViewController: ORKActiveStepViewCont
     override public func start() {
         super.start()
         self.startActivity()
+        
     }
     
     override public func finish() {
@@ -88,27 +96,44 @@ public class ORKConcussionReverseMemoryStepViewController: ORKActiveStepViewCont
     //start actviity sequence
     private func startActivity()
     {
-        
         //create timer to do the sequence display
         timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("updateSequenceDisplay"), userInfo: nil, repeats: true)
        
     }
     
-    private func proceedToNextActivity()
+    
+    
+    func proceedToNextActivity()
     {
         self.sequenceIndex += 1
         
     }
     
-    private func retryCurrentActivity()
+    func retryCurrentActivity()
     {
+        //reset interface and prep for new activity
+        self.prepareInterfaceForActivity()
         self.startActivity()
     }
     
+    private func prepareInterfaceForActivity()
+    {
+        self.contentView.inputField.text = ""
+        self.contentView.sequenceDisplay.text = ""
+        self.contentView.sequenceDisplay.hidden = false
+        
+        self.currentSequenceNumberIndex = 0
+        
+        
+        
+        self.view.frame.size = CGSize(width:self.view.frame.size.width, height: self.view.frame.size.height + 100.0)
+    }
     
     
     func updateSequenceDisplay()
     {
+        self.contentView.description_top.hidden = true
+        
         //get the sequence from game config
         let step = self.step as! ORKConcussionReverseMemoryStep
         let activity = step.activity
@@ -133,8 +158,8 @@ public class ORKConcussionReverseMemoryStepViewController: ORKActiveStepViewCont
             {
                 displayTimer.invalidate()
                 //show keyboard
+                self.showKeyBoardEntry()
                 //self.contentView.inputField.hidden=false
-                self.contentView.inputField.becomeFirstResponder()
                 //self.contentView.sequenceDisplay.hidden=true
             }
         }
@@ -162,7 +187,9 @@ public class ORKConcussionReverseMemoryStepViewController: ORKActiveStepViewCont
     //display keyboard entry to be captured
     private func showKeyBoardEntry()
     {
-        
+        //show key board
+        self.contentView.inputField.becomeFirstResponder()
+       
     }
     
     private func configureAppearance()
@@ -193,14 +220,20 @@ public class ORKConcussionReverseMemoryStepViewController: ORKActiveStepViewCont
         
         if (count(inputString) == count(reverseSequenceString))
         {
+            self.contentView.endEditing(true)
+            
             var validated = self.validateString(inputString,reverseSequenceString: reverseSequenceString)
             if (!validated)
             {
-                self.retryCurrentActivity()
+                self.showMessage("Incorrect entry, please try again.", color: UIColor.redColor())
+                
+                timer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: Selector("retryCurrentActivity"), userInfo: nil, repeats: false)
+                
             }
             else
             {
-                self.proceedToNextActivity()
+                self.showMessage("You entered the correct sequence.", color: UIColor.greenColor())
+                timer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: Selector("proceedToNextActivity"), userInfo: nil, repeats: false)
             }
         }
     }
@@ -214,5 +247,18 @@ public class ORKConcussionReverseMemoryStepViewController: ORKActiveStepViewCont
         
         return false
     }
+    
+    private func showMessage(message: String, color: UIColor)
+    {
+        self.contentView.description_top.hidden = false
+        self.contentView.sequenceDisplay.hidden = true
+        
+        self.contentView.description_top.text = message
+        self.contentView.description_top.textColor = color
+        
+
+    }
+    
+    
     
 }

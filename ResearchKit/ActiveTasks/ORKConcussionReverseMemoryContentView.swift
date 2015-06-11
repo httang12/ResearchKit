@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import ResearchKit.Private
 
-public class ORKConcussionReverseMemoryContentView : UIView
+public class ORKConcussionReverseMemoryContentView : UIView 
 {
     var title: UILabel!
     var description_top: UILabel!
@@ -42,20 +42,21 @@ public class ORKConcussionReverseMemoryContentView : UIView
         title.text = "Digit Span Memory Test"
         title.font = UIFont.boldSystemFontOfSize(18.0)
         self.addSubview(title)
-
+        */
         
         //add description top under title label
         description_top = UILabel()
-        description_top.frame = CGRectMake(10, 80, 300, 75)
+        description_top.frame = CGRectMake(20, 80, 330, 100)
 
-        description_top.textColor = UIColor.whiteColor()
+        description_top.textColor = UIColor.redColor()
         description_top.textAlignment = NSTextAlignment.Center
-        description_top.text = "Memorize the number sequence displayed below."
+        description_top.text = "Incorrect Entry"
         description_top.lineBreakMode = NSLineBreakMode.ByWordWrapping
+         description_top.font = UIFont.systemFontOfSize(30.0)
         description_top.numberOfLines = 0
-        
+        description_top.hidden = true
         self.addSubview(description_top)
-        */
+        
         //add sequence display
         sequenceDisplay = UILabel()
         sequenceDisplay.frame = CGRectMake(20, 0, 330, 330)
@@ -75,6 +76,9 @@ public class ORKConcussionReverseMemoryContentView : UIView
         self.addSubview(sequenceDisplay)
         
         inputField = ORKConcussionReverseMemoryTextField()
+        
+        //inputField.delegate = ORKConcussionReverseMemoryTextFieldDelegate()
+        //inputField = UITextField()
         inputField.frame = CGRectMake(20, 50, 330, 150)
         inputField.keyboardType = UIKeyboardType.NumberPad
         inputField.font = UIFont.systemFontOfSize(80.0)
@@ -129,4 +133,9 @@ public class ORKConcussionReverseMemoryContentView : UIView
 
         self.sequenceDisplay.text = number
     }
+    
+    override public func canBecomeFirstResponder() -> Bool {
+        return true
+    }
+    
 }
