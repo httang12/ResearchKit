@@ -19,6 +19,8 @@ public class ORKConcussionReverseMemoryContentView : UIView
     var actionButton: UIButton!
     var inputField: UITextField!
     
+    var textColor: UIColor = UIColor.whiteColor()
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -48,9 +50,9 @@ public class ORKConcussionReverseMemoryContentView : UIView
         description_top = UILabel()
         description_top.frame = CGRectMake(20, 80, 330, 100)
 
-        description_top.textColor = UIColor.redColor()
+        
         description_top.textAlignment = NSTextAlignment.Center
-        description_top.text = "Incorrect Entry"
+  
         description_top.lineBreakMode = NSLineBreakMode.ByWordWrapping
          description_top.font = UIFont.systemFontOfSize(30.0)
         description_top.numberOfLines = 0
@@ -69,7 +71,7 @@ public class ORKConcussionReverseMemoryContentView : UIView
         sequenceDisplay.textAlignment = NSTextAlignment.Center
         sequenceDisplay.text = ""
         sequenceDisplay.layer.cornerRadius = 8
-        sequenceDisplay.textColor = UIColor.blackColor()
+        sequenceDisplay.textColor = self.textColor
         sequenceDisplay.layer.borderColor = UIColor.grayColor().CGColor
         sequenceDisplay.layer.borderWidth = 1.0
         sequenceDisplay.font = UIFont.systemFontOfSize(120.0)

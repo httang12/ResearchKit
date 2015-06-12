@@ -21,6 +21,10 @@ public class ORKConcussionReverseMemoryStepViewController: ORKActiveStepViewCont
     var currentSequenceNumberIndex: Int = 0
     var tmpStop: Bool = false
     
+    //the concussion step result
+    var concussionResult: ORKConcussionReverseMemoryResult = ORKConcussionReverseMemoryResult()
+    
+    //timer instance used to load substeps
     var timer: NSTimer!
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
@@ -33,7 +37,6 @@ public class ORKConcussionReverseMemoryStepViewController: ORKActiveStepViewCont
 
     override public func viewDidLoad() {
         
-        NSLog("append view...")
         super.viewDidLoad()
         self.contentView = (ORKConcussionReverseMemoryContentView(frame: CGRectMake(0, 0, 500, 350)))
 
@@ -45,23 +48,27 @@ public class ORKConcussionReverseMemoryStepViewController: ORKActiveStepViewCont
         //remove the parent gesture recognizer... they are not needed
         var allViews = self.view.subviews as! [UIView]
         
-        NSLog("SViews:" + self.view.subviews.description)
+        
         
         for subview: UIView in allViews {
-            NSLog(subview.description)
+       
             if let recognizers = subview.gestureRecognizers {
                 for recognizer in recognizers {
                     subview.removeGestureRecognizer(recognizer as! UIGestureRecognizer)
                 }
             }
         }
+        
+        
+        //set appearance
+        self.configureAppearance()
+        
     }
     
     //handle button action
     func actionButtonPressed(sender: UIButton!)
     {
         //should react base on the state of the activity
-        
         //case 1, start activity
         self.startActivity()
     }
@@ -121,10 +128,8 @@ public class ORKConcussionReverseMemoryStepViewController: ORKActiveStepViewCont
         self.contentView.inputField.text = ""
         self.contentView.sequenceDisplay.text = ""
         self.contentView.sequenceDisplay.hidden = false
-        
+        self.contentView.description_top.hidden = true
         self.currentSequenceNumberIndex = 0
-        
-        
         
         self.view.frame.size = CGSize(width:self.view.frame.size.width, height: self.view.frame.size.height + 100.0)
     }
@@ -194,14 +199,35 @@ public class ORKConcussionReverseMemoryStepViewController: ORKActiveStepViewCont
     
     private func configureAppearance()
     {
-        //configure title
+        self.view.backgroundColor = UIColor.blackColor()
         
+        self.setViewColor(self.view)
         
-        //configure description
+
+    }
+    
+    //recursive function to set colors
+    func setViewColor(view:UIView)
+    {
+        NSLog("Recursive View Update!")
         
+        if (view.isKindOfClass(UILabel))
+        {
+            var label: UILabel = view as! UILabel
+            
+            label.textColor = UIColor.whiteColor()
+            label.tintColor = UIColor.whiteColor()
+
+            return
+        }
         
-        //configure numerical display tile
-        
+        if let subviews: [UIView] = view.subviews as? [UIView]
+        {
+            for subview: UIView in subviews
+            {
+                self.setViewColor(subview)
+            }
+        }
     }
     
     //action performed when the numeric input field changed
@@ -255,10 +281,37 @@ public class ORKConcussionReverseMemoryStepViewController: ORKActiveStepViewCont
         
         self.contentView.description_top.text = message
         self.contentView.description_top.textColor = color
-        
 
     }
     
+    private func updateResult()
+    {
+        //get the sequence from game config
+        let step = self.step as! ORKConcussionReverseMemoryStep
+        let activity = step.activity
+        
+        //maybe store this in the controller
+        var joinString = ""
+        
+        var inputString = self.contentView.inputField.text
+        let sequenceString = joinString.join(activity.memorySequence[sequenceIndex].sequence)
+
+        
+        //add a new result entry
+        var subResult = ORKConcussionReverseMemorySubStepResult()
+        subResult.answer = self.contentView.inputField.text
+        subResult.sequence = sequenceString
+        
+        self.concussionResult.subStepResults.append(subResult)
+        
+    }
     
+    
+    //function to retrieve the result object
+    override public var result : ORKStepResult
+    {
+        return self.concussionResult as ORKStepResult
+        
+    }
     
 }

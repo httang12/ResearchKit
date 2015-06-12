@@ -196,6 +196,7 @@ typedef void (^_ORKStateHandler)(ORKState *fromState, ORKState *_toState, id con
 - (void)finish {
     [super finish];
     [self transitionToState:ORKSpatialSpanStepStateStopped];
+    
 }
 
 
