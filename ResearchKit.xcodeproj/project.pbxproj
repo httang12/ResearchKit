@@ -38,7 +38,6 @@
 		676EE1C41B16578C002217BB /* ORKConcussionReverseMemorySequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676EE1C31B16578C002217BB /* ORKConcussionReverseMemorySequence.swift */; };
 		679C33561B29FC4F009E5D9E /* ORKConcussionReverseMemoryTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679C33551B29FC4F009E5D9E /* ORKConcussionReverseMemoryTextField.swift */; };
 		679C33581B2A2FC3009E5D9E /* ORKConcussionReverseMemoryTextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679C33571B2A2FC2009E5D9E /* ORKConcussionReverseMemoryTextFieldDelegate.swift */; };
-		679C335B1B2A4E00009E5D9E /* ORKActiveStepView_public.h in Headers */ = {isa = PBXBuildFile; fileRef = 679C335A1B2A4DE4009E5D9E /* ORKActiveStepView_public.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		861D11A91AA691BB003C98A7 /* ORKScaleSliderView.h in Headers */ = {isa = PBXBuildFile; fileRef = 861D11A71AA691BB003C98A7 /* ORKScaleSliderView.h */; };
 		861D11AA1AA691BB003C98A7 /* ORKScaleSliderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 861D11A81AA691BB003C98A7 /* ORKScaleSliderView.m */; };
 		861D11AD1AA7951F003C98A7 /* ORKChoiceAnswerFormatHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 861D11AB1AA7951F003C98A7 /* ORKChoiceAnswerFormatHelper.h */; };
@@ -391,7 +390,6 @@
 		676EE1C31B16578C002217BB /* ORKConcussionReverseMemorySequence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ORKConcussionReverseMemorySequence.swift; sourceTree = "<group>"; };
 		679C33551B29FC4F009E5D9E /* ORKConcussionReverseMemoryTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ORKConcussionReverseMemoryTextField.swift; sourceTree = "<group>"; };
 		679C33571B2A2FC2009E5D9E /* ORKConcussionReverseMemoryTextFieldDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ORKConcussionReverseMemoryTextFieldDelegate.swift; sourceTree = "<group>"; };
-		679C335A1B2A4DE4009E5D9E /* ORKActiveStepView_public.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ORKActiveStepView_public.h; sourceTree = "<group>"; };
 		861610BF1A8D8EDD00245F7A /* Artwork.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Artwork.xcassets; sourceTree = "<group>"; };
 		861D11A71AA691BB003C98A7 /* ORKScaleSliderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKScaleSliderView.h; sourceTree = "<group>"; };
 		861D11A81AA691BB003C98A7 /* ORKScaleSliderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKScaleSliderView.m; sourceTree = "<group>"; };
@@ -1365,7 +1363,6 @@
 				86C40AFB1A8D7C5B00081FAC /* ORKActiveStepQuantityView.m */,
 				86C40B351A8D7C5B00081FAC /* ORKActiveStepTimerView.h */,
 				86C40B361A8D7C5B00081FAC /* ORKActiveStepTimerView.m */,
-				679C335A1B2A4DE4009E5D9E /* ORKActiveStepView_public.h */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -1611,7 +1608,6 @@
 				86C40DF21A8D7C5C00081FAC /* ORKConsentReviewController.h in Headers */,
 				86C40C961A8D7C5C00081FAC /* ORKDataLogger.h in Headers */,
 				86C40D781A8D7C5C00081FAC /* ORKScaleSlider.h in Headers */,
-				679C335B1B2A4E00009E5D9E /* ORKActiveStepView_public.h in Headers */,
 				86C40D241A8D7C5C00081FAC /* ORKFormStepViewController.h in Headers */,
 				86C40D6A1A8D7C5C00081FAC /* ORKResult.h in Headers */,
 				86C40DD61A8D7C5C00081FAC /* ORKUnitLabel.h in Headers */,
