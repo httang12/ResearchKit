@@ -32,7 +32,6 @@
 #import <ResearchKit/ORKStepViewController.h>
 #import <ResearchKit/ORKRecorder.h>
 
-
 NS_ASSUME_NONNULL_BEGIN
 
 
@@ -81,6 +80,7 @@ ORK_CLASS_AVAILABLE
  or for getting interactive input.
  */
 @property (nonatomic, strong, nullable) UIView *customView;
+
 
 /**
  The image view for the active step. (read-only)
@@ -257,6 +257,9 @@ ORK_CLASS_AVAILABLE
  Subclasses may override this method, but must also call super.
  */
 - (void)prepareStep;
+
+
+
 
 @end
 

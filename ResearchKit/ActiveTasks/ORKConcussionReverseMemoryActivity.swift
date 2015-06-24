@@ -26,20 +26,29 @@ public class ORKConcussionReverseMemoryActivity : NSObject
     //memory holder
     var memorySequence: [ORKConcussionReverseMemorySequence] = [ORKConcussionReverseMemorySequence]()
     
+    var sequenceCount: Int = 0
     
     
     //class initialization
     init(exerciseCount:Int)
     {
-        for index in 1 ... exerciseCount
+        super.init()
+        self.sequenceCount = exerciseCount
+        self.populateSequence()
+    }
+    
+    func resetSequence()
+    {
+        memorySequence.removeAll(keepCapacity: false);
+        self.populateSequence()
+    }
+    
+    private func populateSequence()
+    {
+        for index in 1 ... sequenceCount
         {
             memorySequence.append(ORKConcussionReverseMemorySequence(size: index+2))
         }
     }
-    
-    
-    
-    
-    
     
 }

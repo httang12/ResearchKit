@@ -98,7 +98,6 @@
 - (void)updateDistance:(double)distanceInMeters {
     _contentView.hasDistance = YES;
     _contentView.distanceInMeters = distanceInMeters;
-    
 }
 
 - (void)recordersDidChange {
