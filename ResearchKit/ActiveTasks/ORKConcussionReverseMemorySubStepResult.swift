@@ -10,8 +10,6 @@ import Foundation
 
 public class ORKConcussionReverseMemorySubStepResult : ORKResult
 {
-    var totalTimeSpentInput: Float!
     var sequence: String!
-    var timeTaken: NSDate!
     var answer: String!
 }

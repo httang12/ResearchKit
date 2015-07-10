@@ -243,8 +243,12 @@ public class ORKConcussionReverseMemoryStepViewController: ORKActiveStepViewCont
         var inputString = self.contentView.inputField.text
         let reverseSequenceString = joinString.join(activity.memorySequence[sequenceIndex].sequence.reverse())
         
+        
         if (count(inputString) == count(reverseSequenceString))
         {
+            //sequence length matched, let's update results
+            self.updateResult()
+            
             self.contentView.endEditing(true)
             
             var validated = self.validateString(inputString,reverseSequenceString: reverseSequenceString)
@@ -298,10 +302,9 @@ public class ORKConcussionReverseMemoryStepViewController: ORKActiveStepViewCont
 
         
         //add a new result entry
-        var subResult = ORKConcussionReverseMemorySubStepResult()
+        var subResult = ORKConcussionReverseMemorySubStepResult(identifier: step.identifier)
         subResult.answer = self.contentView.inputField.text
         subResult.sequence = sequenceString
-        
         self.concussionResult.subStepResults.append(subResult)
         
     }
