@@ -354,6 +354,13 @@
 		B1A860F71A9693C400EA57B7 /* consent_07@3x.m4v in Resources */ = {isa = PBXBuildFile; fileRef = B1A860E91A9693C400EA57B7 /* consent_07@3x.m4v */; };
 		B1C0F4E41A9BA65F0022C153 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B1C0F4E11A9BA65F0022C153 /* Localizable.strings */; };
 		B1C7955E1A9FBF04007279BA /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1C7955D1A9FBF04007279BA /* HealthKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		CBB45EB51B563DA500440D02 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBB45EB41B563DA500440D02 /* CoreMotion.framework */; };
+		CBF10E0A1B53B949004B6E4D /* ORKConcussionWalkingStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBF10E091B53B949004B6E4D /* ORKConcussionWalkingStep.swift */; };
+		CBF10E0C1B53B955004B6E4D /* ORKConcussionWalkingStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBF10E0B1B53B955004B6E4D /* ORKConcussionWalkingStepViewController.swift */; };
+		CBF10E0E1B53B96B004B6E4D /* ORKConcussionWalkingActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBF10E0D1B53B96B004B6E4D /* ORKConcussionWalkingActivity.swift */; };
+		CBF10E101B53B988004B6E4D /* ORKConcussionWalkingContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBF10E0F1B53B988004B6E4D /* ORKConcussionWalkingContentView.swift */; };
+		CBF10E121B53B9A4004B6E4D /* ORKConcussionWalkingResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBF10E111B53B9A4004B6E4D /* ORKConcussionWalkingResult.swift */; };
+		CBF10E141B53C3FA004B6E4D /* ORKConcussionWalkingSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBF10E131B53C3FA004B6E4D /* ORKConcussionWalkingSession.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -749,6 +756,13 @@
 		B1C0F4E21A9BA65F0022C153 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B1C1DE4F196F541F00F75544 /* ResearchKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResearchKit.h; sourceTree = "<group>"; };
 		B1C7955D1A9FBF04007279BA /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
+		CBB45EB41B563DA500440D02 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		CBF10E091B53B949004B6E4D /* ORKConcussionWalkingStep.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ORKConcussionWalkingStep.swift; sourceTree = "<group>"; };
+		CBF10E0B1B53B955004B6E4D /* ORKConcussionWalkingStepViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ORKConcussionWalkingStepViewController.swift; sourceTree = "<group>"; };
+		CBF10E0D1B53B96B004B6E4D /* ORKConcussionWalkingActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ORKConcussionWalkingActivity.swift; sourceTree = "<group>"; };
+		CBF10E0F1B53B988004B6E4D /* ORKConcussionWalkingContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ORKConcussionWalkingContentView.swift; sourceTree = "<group>"; };
+		CBF10E111B53B9A4004B6E4D /* ORKConcussionWalkingResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ORKConcussionWalkingResult.swift; sourceTree = "<group>"; };
+		CBF10E131B53C3FA004B6E4D /* ORKConcussionWalkingSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ORKConcussionWalkingSession.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -764,6 +778,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CBB45EB51B563DA500440D02 /* CoreMotion.framework in Frameworks */,
 				B1C7955E1A9FBF04007279BA /* HealthKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -795,6 +810,7 @@
 		3FFF183F1829DB1D00167070 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CBB45EB41B563DA500440D02 /* CoreMotion.framework */,
 				B1C7955D1A9FBF04007279BA /* HealthKit.framework */,
 			);
 			name = Frameworks;
@@ -850,6 +866,7 @@
 		86C40AF91A8D7C5B00081FAC /* ActiveTasks */ = {
 			isa = PBXGroup;
 			children = (
+				CBF10E041B53B897004B6E4D /* ConcussionWalking */,
 				676EE1BC1B16485B002217BB /* Concussion Reverse Memory */,
 				B12EFF4F1AB2165B00A80147 /* Common */,
 				B12EFF4E1AB2161500A80147 /* Audio */,
@@ -1586,6 +1603,19 @@
 			path = Localized;
 			sourceTree = "<group>";
 		};
+		CBF10E041B53B897004B6E4D /* ConcussionWalking */ = {
+			isa = PBXGroup;
+			children = (
+				CBF10E091B53B949004B6E4D /* ORKConcussionWalkingStep.swift */,
+				CBF10E0B1B53B955004B6E4D /* ORKConcussionWalkingStepViewController.swift */,
+				CBF10E0D1B53B96B004B6E4D /* ORKConcussionWalkingActivity.swift */,
+				CBF10E0F1B53B988004B6E4D /* ORKConcussionWalkingContentView.swift */,
+				CBF10E111B53B9A4004B6E4D /* ORKConcussionWalkingResult.swift */,
+				CBF10E131B53C3FA004B6E4D /* ORKConcussionWalkingSession.swift */,
+			);
+			path = ConcussionWalking;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -1992,8 +2022,10 @@
 				86C40D721A8D7C5C00081FAC /* ORKRoundTappingButton.m in Sources */,
 				86C40E2A1A8D7C5C00081FAC /* ORKSignatureView.m in Sources */,
 				86C40CBA1A8D7C5C00081FAC /* ORKVoiceEngine.m in Sources */,
+				CBF10E0C1B53B955004B6E4D /* ORKConcussionWalkingStepViewController.swift in Sources */,
 				670C8FDF1B18B3B200A63F43 /* ORKConcussionReverseMemoryContentView.swift in Sources */,
 				861D11B61AA7D073003C98A7 /* ORKTextChoiceCellGroup.m in Sources */,
+				CBF10E101B53B988004B6E4D /* ORKConcussionWalkingContentView.swift in Sources */,
 				86C40CCA1A8D7C5C00081FAC /* ORKFormItemCell.m in Sources */,
 				86C40CBE1A8D7C5C00081FAC /* UITouch+ORKJSONDictionary.m in Sources */,
 				618DA0521A93D0D600E63AA8 /* ORKAccessibilityFunctions.m in Sources */,
@@ -2001,6 +2033,7 @@
 				86C40CF01A8D7C5C00081FAC /* ORKAnswerTextView.m in Sources */,
 				86C40D3E1A8D7C5C00081FAC /* ORKImageChoiceLabel.m in Sources */,
 				86C40E0A1A8D7C5C00081FAC /* ORKConsentReviewStep.m in Sources */,
+				CBF10E0A1B53B949004B6E4D /* ORKConcussionWalkingStep.swift in Sources */,
 				86C40D1E1A8D7C5C00081FAC /* ORKFormSectionTitleLabel.m in Sources */,
 				86C40CF81A8D7C5C00081FAC /* ORKBorderedButton.m in Sources */,
 				86C40E201A8D7C5C00081FAC /* ORKConsentSignature.m in Sources */,
@@ -2009,7 +2042,10 @@
 				86C40E321A8D7C5C00081FAC /* ORKVisualConsentStepViewController.m in Sources */,
 				618DA0561A93D0D600E63AA8 /* UIView+ORKAccessibility.m in Sources */,
 				676EE1C21B16535F002217BB /* ORKConcussionReverseMemoryActivity.swift in Sources */,
+				CBF10E141B53C3FA004B6E4D /* ORKConcussionWalkingSession.swift in Sources */,
 				86C40D3A1A8D7C5C00081FAC /* ORKHTMLPDFWriter.m in Sources */,
+				CBF10E121B53B9A4004B6E4D /* ORKConcussionWalkingResult.swift in Sources */,
+				CBF10E0E1B53B96B004B6E4D /* ORKConcussionWalkingActivity.swift in Sources */,
 				676EE1C01B164D4B002217BB /* ORKConcussionReverseMemoryStepViewController.swift in Sources */,
 				865EA1691ABA1AA10037C68E /* ORKPicker.m in Sources */,
 				86C40D321A8D7C5C00081FAC /* ORKHealthAnswerFormat.m in Sources */,
