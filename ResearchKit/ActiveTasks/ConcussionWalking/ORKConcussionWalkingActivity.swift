@@ -14,7 +14,6 @@ public class ORKConcussionWalkingActivity : NSObject {
     var healthStore: HKHealthStore!
     var startDate: NSDate!
     var endDate: NSDate!
-    var pedometer = CMPedometer()
 
     
     override init() {
@@ -46,50 +45,6 @@ public class ORKConcussionWalkingActivity : NSObject {
         }
         //  Execute the Query
         self.healthStore.executeQuery(sampleQuery)
-    }
-    
-    public func getStepCount(startDate: NSDate, endDate: NSDate, stepResults:((Double , NSError!) -> Void)) {
-        
-        self.startDate = startDate
-        self.endDate = endDate
-        
-        if HKHealthStore.isHealthDataAvailable() {
-            let healthKitTypesToRead = Set(arrayLiteral: HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierHeartRate),
-                HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierStepCount),
-                HKObjectType.workoutType()
-            )
-            
-            let healthKitTypesToWrite = Set(arrayLiteral:
-                HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierDistanceWalkingRunning),
-                HKQuantityType.workoutType()
-            )
-
-            self.healthStore.requestAuthorizationToShareTypes(healthKitTypesToWrite, readTypes: healthKitTypesToRead, completion: { (success: Bool, error: NSError!) -> Void in
-                if !success {
-                    println("You didn't allow HealthKit to access these read/write data types. In your app, try to handle this error gracefully when a user decides not to provide access. The error was: \(error.localizedDescription). If you're using a simulator, try it on a device.")
-                    stepResults(0.0,error)
-                } else {
-                    //  Construct an HKSampleType for Step count
-                    let sampleType = HKSampleType.quantityTypeForIdentifier(HKQuantityTypeIdentifierStepCount)
-                    //  Call the method to read the most recent weight sample
-                    self.readRecentSamples(sampleType, completion: { (results, error) -> Void in
-                        if (error != nil) {
-                            println("An error has occured with the following description: \(error?.localizedDescription)")
-                            stepResults(0.0,error)
-                        } else {
-                            var totalSteps: Double = 0
-                            for sam: HKQuantitySample in results {
-                                var quantity : HKQuantity = sam.quantity
-                                var count : Double = quantity.doubleValueForUnit(HKUnit.countUnit()) as Double
-                                totalSteps = totalSteps + count
-                                println("Step count is \(quantity.doubleValueForUnit(HKUnit.countUnit()))")
-                            }
-                            stepResults(totalSteps , nil)
-                        }
-                    });
-                }
-            })
-        }
     }
     
     public func getHeartRate(startDate: NSDate, endDate: NSDate, heartRateResults:((Double , NSError!) -> Void)) {
