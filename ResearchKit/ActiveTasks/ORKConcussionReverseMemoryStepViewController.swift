@@ -34,7 +34,8 @@ public class ORKConcussionReverseMemoryStepViewController: ORKActiveStepViewCont
 
     override public func viewDidLoad() {
         super.viewDidLoad()
-        self.contentView = (ORKConcussionReverseMemoryContentView(frame: CGRectMake(0, 0, 500, 350)))
+        let screenWidth = self.view.frame.size.width
+        self.contentView = (ORKConcussionReverseMemoryContentView(frame: CGRectMake(0, 0, screenWidth, 350)))
 
         self.customView = self.contentView
          NSLog("start position:" + self.view.center.x.description + "-" + self.view.center.y.description)
