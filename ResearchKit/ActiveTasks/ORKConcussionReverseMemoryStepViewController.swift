@@ -24,6 +24,7 @@ public class ORKConcussionReverseMemoryStepViewController: ORKActiveStepViewCont
     
     //timer instance used to load substeps
     var timer: NSTimer!
+    var msgTimer: NSTimer!
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -141,7 +142,10 @@ public class ORKConcussionReverseMemoryStepViewController: ORKActiveStepViewCont
         self.contentView.sequenceDisplay.hidden = false
         self.contentView.description_top.hidden = true
         self.currentSequenceNumberIndex = 0
-        self.view.frame.size = CGSize(width:self.view.frame.size.width, height: self.view.frame.size.height + 100.0)
+        //self.view.frame.size = CGSize(width:self.view.frame.size.width, height: self.view.frame.size.height + 100.0)
+        
+        self.contentView.sequenceDisplay.layer.borderWidth = 1.0
+        self.contentView.sequenceDisplay.font = UIFont.systemFontOfSize(120.0)
     }
     
     func updateSequenceDisplay()
@@ -200,6 +204,9 @@ public class ORKConcussionReverseMemoryStepViewController: ORKActiveStepViewCont
     {
         //show key board
         self.contentView.inputField.becomeFirstResponder()
+        //remove border
+        self.contentView.sequenceDisplay.layer.borderWidth = 0
+        self.contentView.sequenceDisplay.font = UIFont.systemFontOfSize(80.0)
         
     }
     
@@ -275,18 +282,20 @@ public class ORKConcussionReverseMemoryStepViewController: ORKActiveStepViewCont
         
         if (count(inputString) == count(reverseSequenceString))
         {
+            
             //sequence length matched, let's update results
             self.updateResult()
             
             self.contentView.endEditing(true)
             
             var validated = self.validateString(inputString,reverseSequenceString: reverseSequenceString)
-            self.hideAllSubViews(self.view)
+           
             if (!validated)
             {
-                self.showMessage("Incorrect entry, please try again.", color: UIColor.redColor())
                 
-                timer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: Selector("retryCurrentActivity"), userInfo: nil, repeats: false)
+                msgTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("showIncorrectMessage"), userInfo: nil, repeats: false)
+                
+                timer = NSTimer.scheduledTimerWithTimeInterval(3, target: self, selector: Selector("retryCurrentActivity"), userInfo: nil, repeats: false)
                 
                 self.numRetries++
                 
@@ -301,11 +310,29 @@ public class ORKConcussionReverseMemoryStepViewController: ORKActiveStepViewCont
             {
                 //reset retry count
                 self.numRetries = 0
-                self.showMessage("You entered the correct sequence.", color: UIColor.greenColor())
+               
+                msgTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("showCorrectMessage"), userInfo: nil, repeats: false)
                     
-                timer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: Selector("proceedToNextActivity"), userInfo: nil, repeats: false)
+                timer = NSTimer.scheduledTimerWithTimeInterval(3, target: self, selector: Selector("proceedToNextActivity"), userInfo: nil, repeats: false)
             }
         }
+    }
+    
+    func showIncorrectMessage()
+    {
+        self.hideAllSubViews(self.view)
+        self.showMessage("Incorrect entry, please try again.", color: UIColor.orangeColor())
+        
+        
+        
+    }
+    
+    func showCorrectMessage()
+    {
+        self.hideAllSubViews(self.view)
+        self.showMessage("You entered the correct sequence.", color: UIColor.greenColor())
+        
+        
     }
     
     func validateString(value: String, reverseSequenceString: String) -> Bool
@@ -320,6 +347,7 @@ public class ORKConcussionReverseMemoryStepViewController: ORKActiveStepViewCont
     
     private func showMessage(message: String, color: UIColor)
     {
+        
         self.contentView.description_top.hidden = false
         self.contentView.sequenceDisplay.hidden = true
         
