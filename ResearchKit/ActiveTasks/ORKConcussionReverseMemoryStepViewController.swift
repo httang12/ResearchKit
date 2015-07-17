@@ -17,7 +17,8 @@ public class ORKConcussionReverseMemoryStepViewController: ORKActiveStepViewCont
     var currentState: String = ""
     var currentSequenceNumberIndex: Int = 0
     var tmpStop: Bool = false
-    
+    var numRetries:Int = 0
+    var maxRetries:Int = 4
     //the concussion step result
     var concussionResult: ORKConcussionReverseMemoryResult = ORKConcussionReverseMemoryResult()
     
@@ -94,8 +95,11 @@ public class ORKConcussionReverseMemoryStepViewController: ORKActiveStepViewCont
     //start actviity sequence
     private func startActivity()
     {
+        
         //create timer to do the sequence display
         timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("updateSequenceDisplay"), userInfo: nil, repeats: true)
+        self.setViewColor(self.view)
+        
        
     }
     
@@ -131,6 +135,7 @@ public class ORKConcussionReverseMemoryStepViewController: ORKActiveStepViewCont
     
     private func prepareInterfaceForActivity()
     {
+
         self.contentView.inputField.text = ""
         self.contentView.sequenceDisplay.text = ""
         self.contentView.sequenceDisplay.hidden = false
@@ -141,7 +146,6 @@ public class ORKConcussionReverseMemoryStepViewController: ORKActiveStepViewCont
     
     func updateSequenceDisplay()
     {
-        self.contentView.description_top.hidden = true
         
         //get the sequence from game config
         let step = self.step as! ORKConcussionReverseMemoryStep
@@ -164,9 +168,11 @@ public class ORKConcussionReverseMemoryStepViewController: ORKActiveStepViewCont
         {
             if let displayTimer = self.timer
             {
+                
                 displayTimer.invalidate()
                 //show keyboard
                 self.showKeyBoardEntry()
+                
             }
         }
     }
@@ -230,6 +236,28 @@ public class ORKConcussionReverseMemoryStepViewController: ORKActiveStepViewCont
         }
     }
     
+    func hideAllSubViews(view:UIView)
+    {
+        if (view.isKindOfClass(UILabel))
+        {
+            var label: UILabel = view as! UILabel
+            
+            label.textColor = UIColor.blackColor()
+            label.tintColor = UIColor.blackColor()
+            
+            return
+        }
+        
+        if let subviews: [UIView] = view.subviews as? [UIView]
+        {
+            for subview: UIView in subviews
+            {
+                self.hideAllSubViews(subview)
+            }
+        }
+
+    }
+    
     //action performed when the numeric input field changed
     func inputValueChanged()
     {
@@ -253,15 +281,26 @@ public class ORKConcussionReverseMemoryStepViewController: ORKActiveStepViewCont
             self.contentView.endEditing(true)
             
             var validated = self.validateString(inputString,reverseSequenceString: reverseSequenceString)
+            self.hideAllSubViews(self.view)
             if (!validated)
             {
                 self.showMessage("Incorrect entry, please try again.", color: UIColor.redColor())
                 
                 timer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: Selector("retryCurrentActivity"), userInfo: nil, repeats: false)
                 
+                self.numRetries++
+                
+                if (self.numRetries>=self.maxRetries)
+                {
+                    //end if 4 retries has reached
+                    self.endActvity()
+                }
+
             }
             else
             {
+                //reset retry count
+                self.numRetries = 0
                 self.showMessage("You entered the correct sequence.", color: UIColor.greenColor())
                     
                 timer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: Selector("proceedToNextActivity"), userInfo: nil, repeats: false)
