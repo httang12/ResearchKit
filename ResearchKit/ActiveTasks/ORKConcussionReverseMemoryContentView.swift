@@ -48,8 +48,10 @@ public class ORKConcussionReverseMemoryContentView : UIView
         
         //add description top under title label
         description_top = UILabel()
+        
+        let screenWidth = self.frame.size.width
+        
         description_top.frame = CGRectMake(20, 80, 330, 100)
-
         
         description_top.textAlignment = NSTextAlignment.Center
   
@@ -61,8 +63,9 @@ public class ORKConcussionReverseMemoryContentView : UIView
         
         //add sequence display
         sequenceDisplay = UILabel()
-        sequenceDisplay.frame = CGRectMake(20, 0, 330, 330)
-        
+        //sequenceDisplay.frame = CGRectMake(20, 0, 330, 330)
+        NSLog(screenWidth.description)
+        sequenceDisplay.frame = CGRectMake(20, 0, screenWidth-40, screenWidth-40)
         
         sequenceDisplay.lineBreakMode = NSLineBreakMode.ByWordWrapping
         sequenceDisplay.numberOfLines = 0
