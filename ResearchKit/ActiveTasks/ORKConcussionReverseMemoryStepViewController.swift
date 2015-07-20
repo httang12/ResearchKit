@@ -330,7 +330,7 @@ public class ORKConcussionReverseMemoryStepViewController: ORKActiveStepViewCont
     func showCorrectMessage()
     {
         self.hideAllSubViews(self.view)
-        self.showMessage("You entered the correct sequence.", color: UIColor.greenColor())
+        self.showMessage("You entered the correct sequence.", color: UIColor.whiteColor())
         
         
     }
