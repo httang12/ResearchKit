@@ -321,9 +321,7 @@ public class ORKConcussionReverseMemoryStepViewController: ORKActiveStepViewCont
     func showIncorrectMessage()
     {
         self.hideAllSubViews(self.view)
-        self.showMessage("Incorrect entry, please try again.", color: UIColor.orangeColor())
-        
-        
+        self.showMessage("Incorrect entry, please try again.", color: UIColor(red: 238/255, green: 91/255, blue: 10/255, alpha: 1))
         
     }
     
