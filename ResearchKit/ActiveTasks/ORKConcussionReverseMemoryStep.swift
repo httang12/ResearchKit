@@ -14,6 +14,7 @@ This is the class that defines the Reverse Memory Active Task Step
 **/
 public class ORKConcussionReverseMemoryStep : ORKActiveStep
 {
+    var inprogressTitle:String = "Watch the sequence of number on screen."
     
     //sequence associated with the step
     var activity: ORKConcussionReverseMemoryActivity!
@@ -26,7 +27,7 @@ public class ORKConcussionReverseMemoryStep : ORKActiveStep
     {
         super.init(identifier: identifier)
         self.activity = activity
-        self.title = "Watch the sequence of number on screen."
+        self.title = inprogressTitle
         self.stepDuration = 30.0
         self.shouldContinueOnFinish = true
         
