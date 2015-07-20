@@ -36,8 +36,11 @@ public class ORKOrderedTask_Concusssion {
         var instruction: ORKInstructionStep = ORKInstructionStep(identifier: "instructions")
         instruction.title = "\(duration) minute walk Test"
         instruction.detailText = "This activity monitors your heart rate and measures how far you can walk in \(duration) minutes"
-        
         steps.addObject(instruction)
+        
+        var timerStep: ORKCountdownStep = ORKCountdownStep(identifier: identifier)
+        timerStep.stepDuration = 5.0
+        steps.addObject(timerStep)
         
         var activity: ORKConcussionWalkingActivity = ORKConcussionWalkingActivity()
 

@@ -11,7 +11,7 @@ import ResearchKit.Private
 import HealthKit
 import CoreMotion
 
-public class ORKConcussionWalkingStepViewController: ORKActiveStepViewController {
+public class ORKConcussionWalkingStepViewController: ORKActiveStepViewController, ORKPedometerRecorderDelegate {
     
     enum State : String {
         case Normal =   "normal"
@@ -40,7 +40,7 @@ public class ORKConcussionWalkingStepViewController: ORKActiveStepViewController
     var state: State = State.Normal
     
     var startDate: NSDate!
-    
+    var pedometerRecorder: ORKPedometerRecorder?
     
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
@@ -59,14 +59,70 @@ public class ORKConcussionWalkingStepViewController: ORKActiveStepViewController
         super.viewDidLoad()
         startDate = NSDate.new()
         self.contentView = (ORKConcussionWalkingContentView(frame: CGRectMake(0, 0, self.view.frame.size.width, 350)))
-        
         self.customView = self.contentView
         
         self.startActivity()
-        self.readPedometerData()
+        self.configureRecorder()
+    }
+    
+    func configureRecorder() {
+        var tempOutputDirectory = NSTemporaryDirectory().stringByAppendingPathComponent("recorderData")
+        var url: NSURL = NSURL(fileURLWithPath: tempOutputDirectory)!
+        pedometerRecorder = ORKPedometerRecorder(step: self.step!, outputDirectory: url)
+        pedometerRecorder!.delegate = self
+        pedometerRecorder!.start()
+    }
+    
+    public func pedometerRecorderDidUpdate(pedometerRecorder: ORKPedometerRecorder) {
+        let numberOfSteps: Double = Double(pedometerRecorder.totalNumberOfSteps)
+        let distance: Double = Double(pedometerRecorder.totalDistance)
+        self.concussionResult.stepCount = numberOfSteps
+        self.concussionResult.distance = distance
+        var interval = NSDate.new().timeIntervalSinceDate(self.startDate)/self.sec
+        var stdStepCount = self.stdStepCountPerMin * interval
         
-        background_task = application.beginBackgroundTaskWithExpirationHandler({ () -> Void in
+        if Int(stdStepCount-10) ... Int(stdStepCount+10) ~= Int(numberOfSteps) {
+            if self.state != State.Normal {
+                self.postNotificationWithMessage("You are walking at normal speed. Go ahead")
+                self.state = State.Normal
+            }
+        } else if numberOfSteps < stdStepCount-10 {
+            if self.state != State.Low {
+                self.postNotificationWithMessage("You are walking too slow.")
+                self.state = State.Low
+            }
+        } else if numberOfSteps > stdStepCount+10 {
+            if self.state != State.High {
+                self.postNotificationWithMessage("You are walking at a faster rate.")
+                self.state = State.High
+            }
+        }
+        
+        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            self.contentView.stepCountLabel.text = "\(numberOfSteps) Steps"
+            let distanceValue = String(format: "%.2f Metres", distance)
+            self.contentView.distanceLabel.text = distanceValue
         })
+    }
+
+    
+    override public func recorder(recorder: ORKRecorder, didCompleteWithResult result: ORKResult?) {
+        self.concussionResult.stepResults.append(result!)
+    }
+    
+    override public func recorder(recorder: ORKRecorder, didFailWithError error: NSError) {
+        let alertView : UIAlertController = UIAlertController(title: "Failed", message: error.localizedDescription, preferredStyle: UIAlertControllerStyle.Alert)
+        let defaultAction : UIAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action: UIAlertAction!) -> Void in
+            
+        })
+        alertView.addAction(defaultAction)
+        self.presentViewController(alertView, animated: true, completion: nil)
+    }
+    
+    //function to retrieve the result object
+    override public var result : ORKStepResult {
+            return self.concussionResult as ORKStepResult
+            
     }
     
     //start actviity sequence
@@ -84,53 +140,10 @@ public class ORKConcussionWalkingStepViewController: ORKActiveStepViewController
             self.postNotificationWithMessage("\(remainingTime) more minutes remaining.")
         } else {
             self.postNotificationWithMessage("You have completed your 6 minute task")
-            UIApplication.sharedApplication().endBackgroundTask(background_task)
-            background_task = UIBackgroundTaskInvalid
             timer.invalidate()
+            pedometerRecorder?.stop()
             self.finish()
         }
-    }
-    
-    public func readPedometerData() {
-        pedometer.startPedometerUpdatesFromDate(startDate, withHandler: { (data, error) -> Void in
-            if error == nil {
-                var totalSteps = data.numberOfSteps.doubleValue
-                self.concussionResult.stepCount = totalSteps
-                self.concussionResult.distance = data.distance.doubleValue
-                var interval = NSDate.new().timeIntervalSinceDate(self.startDate)/self.sec
-                var stdStepCount = self.stdStepCountPerMin * interval
-
-                if Int(stdStepCount-10) ... Int(stdStepCount+10) ~= Int(totalSteps) {
-                    if self.state != State.Normal {
-                        self.postNotificationWithMessage("You are walking at normal speed. Go ahead")
-                        self.state = State.Normal
-                    }
-                } else if totalSteps < stdStepCount-10 {
-                    if self.state != State.Low {
-                        self.postNotificationWithMessage("You are walking too slow.")
-                        self.state = State.Low
-                    }
-                } else if totalSteps > stdStepCount+10 {
-                    if self.state != State.High {
-                        self.postNotificationWithMessage("You are walking at a faster rate.")
-                        self.state = State.High
-                    }
-                }
-
-                dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                    self.contentView.stepCountLabel.text = "\(totalSteps) Steps"
-                    let distanceValue = String(format: "%.2f Metres", data.distance.doubleValue)
-                    self.contentView.distanceLabel.text = distanceValue
-                })
-            } else {
-                let alertView : UIAlertController = UIAlertController(title: "Failed", message: error.localizedDescription, preferredStyle: UIAlertControllerStyle.Alert)
-                let defaultAction : UIAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action: UIAlertAction!) -> Void in
-                    
-                })
-                alertView.addAction(defaultAction)
-                self.presentViewController(alertView, animated: true, completion: nil)
-            }
-        })
     }
     
     public func postNotificationWithMessage(body: String) {

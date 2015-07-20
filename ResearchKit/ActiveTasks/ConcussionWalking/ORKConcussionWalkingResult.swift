@@ -9,6 +9,7 @@
 import Foundation
 
 public class ORKConcussionWalkingResult : ORKStepResult {
-    var stepCount: Double?
-    var distance: Double?
+    var stepCount: Double = 0.0
+    var distance: Double = 0.0
+    var stepResults: [ORKResult] = [ORKResult]()
 }
