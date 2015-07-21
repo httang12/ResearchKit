@@ -147,8 +147,14 @@ public class ORKConcussionWalkingStepViewController: ORKActiveStepViewController
     }
     
     public func postNotificationWithMessage(body: String) {
+        let activeNotifications = UIApplication.sharedApplication().scheduledLocalNotifications
+        UIApplication.sharedApplication().cancelAllLocalNotifications()
+        for notification in activeNotifications as! [UILocalNotification] {
+            UIApplication.sharedApplication().scheduleLocalNotification(notification)
+        }
         var localNotification:UILocalNotification = UILocalNotification()
-        localNotification.alertAction = "view broadcast messages"
+        localNotification.alertAction = "Walking activity messages"
+        localNotification.alertTitle = "Walking Activity"
         localNotification.alertBody = body
         localNotification.fireDate = NSDate(timeIntervalSinceNow: 0)
         localNotification.soundName = UILocalNotificationDefaultSoundName;
