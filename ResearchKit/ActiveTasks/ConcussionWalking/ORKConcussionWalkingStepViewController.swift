@@ -83,17 +83,17 @@ public class ORKConcussionWalkingStepViewController: ORKActiveStepViewController
         
         if Int(stdStepCount-10) ... Int(stdStepCount+10) ~= Int(numberOfSteps) {
             if self.state != State.Normal {
-                self.postNotificationWithMessage("You are walking at normal speed. Go ahead")
+                self.postNotificationWithMessage("Normal speed")
                 self.state = State.Normal
             }
         } else if numberOfSteps < stdStepCount-10 {
             if self.state != State.Low {
-                self.postNotificationWithMessage("You are walking too slow.")
+                self.postNotificationWithMessage("Walk Faster")
                 self.state = State.Low
             }
         } else if numberOfSteps > stdStepCount+10 {
             if self.state != State.High {
-                self.postNotificationWithMessage("You are walking at a faster rate.")
+                self.postNotificationWithMessage("Slow Down")
                 self.state = State.High
             }
         }
@@ -137,9 +137,9 @@ public class ORKConcussionWalkingStepViewController: ORKActiveStepViewController
         var remainingTime: Int = 6 - interval
         
         if interval < 6 {
-            self.postNotificationWithMessage("\(remainingTime) more minutes remaining.")
+            self.postNotificationWithMessage("\(remainingTime) mins left.")
         } else {
-            self.postNotificationWithMessage("You have completed your 6 minute task")
+            self.postNotificationWithMessage("Completed")
             timer.invalidate()
             pedometerRecorder?.stop()
             self.finish()
@@ -154,7 +154,7 @@ public class ORKConcussionWalkingStepViewController: ORKActiveStepViewController
         }
         var localNotification:UILocalNotification = UILocalNotification()
         localNotification.alertAction = "Walking activity messages"
-        localNotification.alertTitle = "Walking Activity"
+        localNotification.alertTitle = body
         localNotification.alertBody = body
         localNotification.fireDate = NSDate(timeIntervalSinceNow: 0)
         localNotification.soundName = UILocalNotificationDefaultSoundName;
