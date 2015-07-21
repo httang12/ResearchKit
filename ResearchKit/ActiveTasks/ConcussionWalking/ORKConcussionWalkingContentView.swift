@@ -36,7 +36,7 @@ public class ORKConcussionWalkingContentView : UIView {
         title.frame = CGRectMake(10, 10, self.frame.size.width-20, 75)
         title.textColor = UIColor.blackColor()
         title.textAlignment = NSTextAlignment.Center
-        title.text = "Concussion walking test"
+        title.text = "Walk in a steady pace for 6 minutes"
         title.font = UIFont.boldSystemFontOfSize(20.0)
         self.addSubview(title)
         

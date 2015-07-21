@@ -24,7 +24,7 @@ public class ORKConcussionWalkingStep : ORKActiveStep {
     {
         super.init(identifier: identifier)
         self.activity = activity
-        self.title = "Walk Test"
+        self.title = "Walk Exercise"
         self.shouldContinueOnFinish = false
         
         //create session
