@@ -354,6 +354,9 @@
 		B1A860F71A9693C400EA57B7 /* consent_07@3x.m4v in Resources */ = {isa = PBXBuildFile; fileRef = B1A860E91A9693C400EA57B7 /* consent_07@3x.m4v */; };
 		B1C0F4E41A9BA65F0022C153 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B1C0F4E11A9BA65F0022C153 /* Localizable.strings */; };
 		B1C7955E1A9FBF04007279BA /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1C7955D1A9FBF04007279BA /* HealthKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		CB77AA201B5E9811006F5773 /* ORKConcussionWalkingCompletionStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB77AA1F1B5E9811006F5773 /* ORKConcussionWalkingCompletionStep.swift */; };
+		CBAEA7951B5E994A001C18FD /* ORKConcussionWalkingCompletionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAEA7941B5E994A001C18FD /* ORKConcussionWalkingCompletionViewController.swift */; };
+		CBAEA7971B5E9A53001C18FD /* ORKConcussionWalkingCompletionContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAEA7961B5E9A53001C18FD /* ORKConcussionWalkingCompletionContentView.swift */; };
 		CBB45EB51B563DA500440D02 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBB45EB41B563DA500440D02 /* CoreMotion.framework */; };
 		CBF10E0A1B53B949004B6E4D /* ORKConcussionWalkingStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBF10E091B53B949004B6E4D /* ORKConcussionWalkingStep.swift */; };
 		CBF10E0C1B53B955004B6E4D /* ORKConcussionWalkingStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBF10E0B1B53B955004B6E4D /* ORKConcussionWalkingStepViewController.swift */; };
@@ -756,6 +759,9 @@
 		B1C0F4E21A9BA65F0022C153 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B1C1DE4F196F541F00F75544 /* ResearchKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResearchKit.h; sourceTree = "<group>"; };
 		B1C7955D1A9FBF04007279BA /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
+		CB77AA1F1B5E9811006F5773 /* ORKConcussionWalkingCompletionStep.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ORKConcussionWalkingCompletionStep.swift; sourceTree = "<group>"; };
+		CBAEA7941B5E994A001C18FD /* ORKConcussionWalkingCompletionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ORKConcussionWalkingCompletionViewController.swift; sourceTree = "<group>"; };
+		CBAEA7961B5E9A53001C18FD /* ORKConcussionWalkingCompletionContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ORKConcussionWalkingCompletionContentView.swift; sourceTree = "<group>"; };
 		CBB45EB41B563DA500440D02 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		CBF10E091B53B949004B6E4D /* ORKConcussionWalkingStep.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ORKConcussionWalkingStep.swift; sourceTree = "<group>"; };
 		CBF10E0B1B53B955004B6E4D /* ORKConcussionWalkingStepViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ORKConcussionWalkingStepViewController.swift; sourceTree = "<group>"; };
@@ -1612,6 +1618,9 @@
 				CBF10E0F1B53B988004B6E4D /* ORKConcussionWalkingContentView.swift */,
 				CBF10E111B53B9A4004B6E4D /* ORKConcussionWalkingResult.swift */,
 				CBF10E131B53C3FA004B6E4D /* ORKConcussionWalkingSession.swift */,
+				CB77AA1F1B5E9811006F5773 /* ORKConcussionWalkingCompletionStep.swift */,
+				CBAEA7941B5E994A001C18FD /* ORKConcussionWalkingCompletionViewController.swift */,
+				CBAEA7961B5E9A53001C18FD /* ORKConcussionWalkingCompletionContentView.swift */,
 			);
 			path = ConcussionWalking;
 			sourceTree = "<group>";
@@ -2005,6 +2014,7 @@
 				86C40DC41A8D7C5C00081FAC /* ORKTapCountLabel.m in Sources */,
 				86C40D4C1A8D7C5C00081FAC /* ORKLabel.m in Sources */,
 				86C40C9E1A8D7C5C00081FAC /* ORKDeviceMotionRecorder.m in Sources */,
+				CB77AA201B5E9811006F5773 /* ORKConcussionWalkingCompletionStep.swift in Sources */,
 				86C40D961A8D7C5C00081FAC /* ORKStepViewController.m in Sources */,
 				86C40DF81A8D7C5C00081FAC /* ORKConsentSignatureController.m in Sources */,
 				86C40D8C1A8D7C5C00081FAC /* ORKSkin.m in Sources */,
@@ -2019,6 +2029,7 @@
 				86C40E061A8D7C5C00081FAC /* ORKConsentLearnMoreViewController.m in Sources */,
 				86C40D7A1A8D7C5C00081FAC /* ORKScaleSlider.m in Sources */,
 				86C40C801A8D7C5C00081FAC /* ORKActiveStep.m in Sources */,
+				CBAEA7971B5E9A53001C18FD /* ORKConcussionWalkingCompletionContentView.swift in Sources */,
 				86C40D721A8D7C5C00081FAC /* ORKRoundTappingButton.m in Sources */,
 				86C40E2A1A8D7C5C00081FAC /* ORKSignatureView.m in Sources */,
 				86C40CBA1A8D7C5C00081FAC /* ORKVoiceEngine.m in Sources */,
@@ -2124,6 +2135,7 @@
 				86C40C181A8D7C5C00081FAC /* ORKAudioContentView.m in Sources */,
 				86C40C8E1A8D7C5C00081FAC /* ORKActiveStepViewController.m in Sources */,
 				B183A5011A8535D100C76870 /* (null) in Sources */,
+				CBAEA7951B5E994A001C18FD /* ORKConcussionWalkingCompletionViewController.swift in Sources */,
 				86C40CE61A8D7C5C00081FAC /* ORKAnswerFormat.m in Sources */,
 				B11C54A11A9EF4A700265E61 /* ORKConsentSharingStepViewController.m in Sources */,
 				86C40E161A8D7C5C00081FAC /* ORKConsentSection+AssetLoading.m in Sources */,
