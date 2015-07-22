@@ -21,10 +21,13 @@ public class ORKConcussionWalkingStepViewController: ORKActiveStepViewController
     
     let sec : Double = 60
     let stdStepCountPerMin : Double = 50
+    let feetConvFactor: Double = 3.28084
     
     var contentView:ORKConcussionWalkingContentView!
     
     var pedometer = CMPedometer()
+    var healthStore: HKHealthStore = HKHealthStore()
+    var observeQuery: HKObserverQuery!
     
     var activity: ORKConcussionWalkingActivity = ORKConcussionWalkingActivity()
     
@@ -37,11 +40,14 @@ public class ORKConcussionWalkingStepViewController: ORKActiveStepViewController
     //timer instance used to load substeps
     var timer: NSTimer!
     
+    var remTimer: NSTimer!
+    
     var state: State = State.Normal
     
     var startDate: NSDate!
     var pedometerRecorder: ORKPedometerRecorder?
     
+    var secondsLeft: Int = 360
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -63,6 +69,22 @@ public class ORKConcussionWalkingStepViewController: ORKActiveStepViewController
         
         self.startActivity()
         self.configureRecorder()
+        self.startObservingForHeartRateSamples()
+        
+        remTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("updateCounter"), userInfo: nil, repeats: true)
+    }
+    
+    func updateCounter() {
+        var spentTime = Int(NSDate.new().timeIntervalSinceDate(startDate))
+        var remTime = secondsLeft - spentTime
+        if(remTime > 0) {
+            var minute = remTime/60
+            var seconds = String(format: "%02d", remTime % 60)
+            self.contentView.minCounterLabel.text = "\(minute):\(seconds)"
+        } else {
+            self.contentView.minCounterLabel.text = "00:00"
+            remTimer.invalidate()
+        }
     }
     
     func configureRecorder() {
@@ -75,9 +97,16 @@ public class ORKConcussionWalkingStepViewController: ORKActiveStepViewController
     
     public func pedometerRecorderDidUpdate(pedometerRecorder: ORKPedometerRecorder) {
         let numberOfSteps: Double = Double(pedometerRecorder.totalNumberOfSteps)
-        let distance: Double = Double(pedometerRecorder.totalDistance)
+        let distance: Double = Double(pedometerRecorder.totalDistance) * feetConvFactor
         self.concussionResult.stepCount = numberOfSteps
         self.concussionResult.distance = distance
+        
+        //  Updating completion step
+        var currentStep: ORKConcussionWalkingStep = self.step as! ORKConcussionWalkingStep
+        var completionStep: ORKConcussionWalkingCompletionStep = currentStep.completionStep
+        completionStep.stepCount = numberOfSteps
+        completionStep.distance = distance
+
         var interval = NSDate.new().timeIntervalSinceDate(self.startDate)/self.sec
         var stdStepCount = self.stdStepCountPerMin * interval
         
@@ -100,9 +129,10 @@ public class ORKConcussionWalkingStepViewController: ORKActiveStepViewController
         
         dispatch_async(dispatch_get_main_queue(), { () -> Void in
             self.contentView.stepCountLabel.text = "\(numberOfSteps) Steps"
-            let distanceValue = String(format: "%.2f Metres", distance)
+            let distanceValue = String(format: "%.2f Feets", distance)
             self.contentView.distanceLabel.text = distanceValue
         })
+        
     }
 
     
@@ -136,6 +166,11 @@ public class ORKConcussionWalkingStepViewController: ORKActiveStepViewController
         var interval: Int = Int(NSDate.new().timeIntervalSinceDate(startDate)/sec)
         var remainingTime: Int = 6 - interval
         
+        var currentStep: ORKConcussionWalkingStep = self.step as! ORKConcussionWalkingStep
+        var completionStep: ORKConcussionWalkingCompletionStep = currentStep.completionStep
+        completionStep.stepCount = self.concussionResult.stepCount
+        completionStep.distance = self.concussionResult.distance
+        
         if interval < 6 {
             self.postNotificationWithMessage("\(remainingTime) mins left.")
         } else {
@@ -160,4 +195,93 @@ public class ORKConcussionWalkingStepViewController: ORKActiveStepViewController
         localNotification.soundName = UILocalNotificationDefaultSoundName;
         UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
     }
+    
+    func startObservingForHeartRateSamples() {
+        println("startObservingForHeartRateSamples")
+        
+        if HKHealthStore.isHealthDataAvailable() {
+            let healthKitTypesToRead = Set(arrayLiteral: HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierHeartRate),
+                HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierStepCount),
+                HKObjectType.workoutType()
+            )
+            
+            let healthKitTypesToWrite = Set(arrayLiteral:
+                HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierDistanceWalkingRunning),
+                HKQuantityType.workoutType()
+            )
+            
+            self.healthStore.requestAuthorizationToShareTypes(healthKitTypesToWrite, readTypes: healthKitTypesToRead, completion: { (success: Bool, error: NSError!) -> Void in
+                if !success {
+                    println("You didn't allow HealthKit to access these read/write data types. In your app, try to handle this error gracefully when a user decides not to provide access. The error was: \(error.localizedDescription). If you're using a simulator, try it on a device.")
+                } else {
+                    let sampleType = HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierHeartRate)
+                    
+                    if self.observeQuery != nil {
+                        self.healthStore.stopQuery(self.observeQuery)
+                    }
+                    
+                    self.observeQuery = HKObserverQuery(sampleType: sampleType, predicate: nil) {
+                        (query, completionHandler, error) in
+                        
+                        if error != nil {
+                            println("An error has occured with the following description: \(error.localizedDescription)")
+                        } else {
+                            self.readRecentSamples(sampleType)
+                        }
+                    }
+                    self.healthStore.executeQuery(self.observeQuery)
+                }
+            })
+        }
+    }
+    
+    func retrieveMostRecentHeartRateSample(completionHandler: (sample: HKQuantitySample) -> Void) {
+        let sampleType = HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierHeartRate)
+        let predicate = HKQuery.predicateForSamplesWithStartDate(NSDate.distantPast() as! NSDate, endDate: NSDate(), options: HKQueryOptions.None)
+        let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierStartDate, ascending: false)
+        
+        let query = HKSampleQuery(sampleType: sampleType, predicate: predicate, limit: 1, sortDescriptors: [sortDescriptor])
+            { (query, results, error) in
+                if error != nil {
+                    println("An error has occured with the following description: \(error.localizedDescription)")
+                } else {
+                    let mostRecentSample = results[0] as! HKQuantitySample
+                    completionHandler(sample: mostRecentSample)
+                }
+        }
+        healthStore.executeQuery(query)
+    }
+    
+    func readRecentSamples(sampleType:HKSampleType) {
+        
+        // Building the Predicate
+        let now   = NSDate()
+        let mostRecentPredicate = HKQuery.predicateForSamplesWithStartDate(startDate, endDate:NSDate.new(), options: .None)
+        
+        // Building the sort descriptor to return the samples in descending order
+        let sortDescriptor = NSSortDescriptor(key:HKSampleSortIdentifierStartDate, ascending: false)
+        
+        // Building samples query
+        let sampleQuery = HKSampleQuery(sampleType: sampleType, predicate: mostRecentPredicate, limit:Int(HKObjectQueryNoLimit), sortDescriptors: [sortDescriptor]) { (sampleQuery, results, error ) -> Void in
+                
+                // Execute the completion closure
+                var totalCount: Double = 0
+                for sam in results as! [HKQuantitySample] {
+                    var quantity : HKQuantity = sam.quantity
+                    let count = quantity.doubleValueForUnit(HKUnit(fromString: "count/min"))
+                    totalCount = totalCount + count
+                }
+            var currentStep: ORKConcussionWalkingStep = self.step as! ORKConcussionWalkingStep
+            var completionStep: ORKConcussionWalkingCompletionStep = currentStep.completionStep
+            completionStep.heartRate = totalCount / Double(results.count)
+            self.concussionResult.averageHeartRate = totalCount / Double(results.count)
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                self.contentView.heartRateLabel.text = "\(totalCount / Double(results.count)) BPM"
+            })
+
+        }
+        //  Execute the Query
+        self.healthStore.executeQuery(sampleQuery)
+    }
+
 }

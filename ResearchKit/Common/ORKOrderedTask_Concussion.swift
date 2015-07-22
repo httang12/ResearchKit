@@ -43,10 +43,14 @@ public class ORKOrderedTask_Concusssion {
         steps.addObject(timerStep)
         
         var activity: ORKConcussionWalkingActivity = ORKConcussionWalkingActivity()
+        var completion: ORKConcussionWalkingCompletionStep = ORKConcussionWalkingCompletionStep(identifier: identifier)
 
-        var walkingStep: ORKConcussionWalkingStep = ORKConcussionWalkingStep(identifier: identifier, activity: activity)
+        var walkingStep: ORKConcussionWalkingStep = ORKConcussionWalkingStep(identifier: identifier, activity: activity, completionStep: completion)
         walkingStep.stepDuration = NSTimeInterval(duration * 60)
+        
         steps.addObject(walkingStep)
+        
+        steps.addObject(completion)
         
         var walkTest: ORKOrderedTask = ORKOrderedTask(identifier: identifier, steps: steps as [AnyObject])
         

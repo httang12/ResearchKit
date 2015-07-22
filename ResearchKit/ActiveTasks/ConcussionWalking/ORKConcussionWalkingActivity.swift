@@ -14,7 +14,7 @@ public class ORKConcussionWalkingActivity : NSObject {
     var healthStore: HKHealthStore!
     var startDate: NSDate!
     var endDate: NSDate!
-
+    var observeQuery: HKObserverQuery!
     
     override init() {
         self.healthStore = HKHealthStore()
@@ -90,5 +90,4 @@ public class ORKConcussionWalkingActivity : NSObject {
             })
         }
     }
-
 }

@@ -11,5 +11,6 @@ import Foundation
 public class ORKConcussionWalkingResult : ORKStepResult {
     var stepCount: Double = 0.0
     var distance: Double = 0.0
+    var averageHeartRate: Double = 0.0
     var stepResults: [ORKResult] = [ORKResult]()
 }
