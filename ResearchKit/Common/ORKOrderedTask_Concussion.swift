@@ -34,7 +34,7 @@ public class ORKOrderedTask_Concusssion {
         
         var steps = NSMutableArray()
         var instruction: ORKInstructionStep = ORKInstructionStep(identifier: "instructions")
-        instruction.title = "\(duration) minute walk Test"
+        instruction.title = "\(duration) Minute Walk Test"
         instruction.detailText = "This activity monitors your heart rate and measures how far you can walk in \(duration) minutes"
         steps.addObject(instruction)
         

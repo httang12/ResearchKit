@@ -30,9 +30,12 @@ public class ORKConcussionWalkingCompletionContentView : UIView {
     //configure UI Elements
     private func configureUI() {
         
+        var width:Float = 100
+        var spacing:Float = (Float(self.frame.size.width)-width)/2
+        
         //  Add step count label
         stepCountLabel = UILabel()
-        stepCountLabel.frame = CGRectMake(10, 30, (self.frame.size.width-20)/2, 40)
+        stepCountLabel.frame = CGRectMake(CGFloat(spacing), 30, CGFloat(width), CGFloat(width))
         stepCountLabel.textColor = UIColor.blackColor()
         stepCountLabel.textAlignment = NSTextAlignment.Center
         stepCountLabel.text = "Total : 0.0 Steps"
@@ -42,7 +45,7 @@ public class ORKConcussionWalkingCompletionContentView : UIView {
         
         //  Add step count label
         distanceLabel = UILabel()
-        distanceLabel.frame = CGRectMake(self.frame.size.width/2, 30, (self.frame.size.width-20)/2, 40)
+        distanceLabel.frame = CGRectMake(CGFloat(spacing), CGFloat(width+30), CGFloat(width), CGFloat(width))
         distanceLabel.textColor = UIColor.blackColor()
         distanceLabel.textAlignment = NSTextAlignment.Center
         distanceLabel.text = "Distance : 0.0 feets"
@@ -52,7 +55,8 @@ public class ORKConcussionWalkingCompletionContentView : UIView {
         
         //  Add step count label
         heartRateLabel = UILabel()
-        heartRateLabel.frame = CGRectMake(10, 100, self.frame.size.width-20, 40)
+        heartRateLabel.frame = CGRectMake(CGFloat(spacing), CGFloat(2*width+2*30), CGFloat(width), CGFloat(width))
+
         heartRateLabel.textColor = UIColor.blackColor()
         heartRateLabel.textAlignment = NSTextAlignment.Center
         heartRateLabel.text = "Average heart rate : 0 BPM"

@@ -27,7 +27,7 @@ public class ORKConcussionWalkingStep : ORKActiveStep {
         super.init(identifier: identifier)
         self.activity = activity
         self.completionStep = completionStep
-        self.title = "Walk Exercise"
+        self.title = "Walk in a comfortable pace for 6 minutes"
         self.shouldContinueOnFinish = false
         
         //create session
@@ -60,5 +60,6 @@ public class ORKConcussionWalkingStep : ORKActiveStep {
     override public func validateParameters() {
         //validate the parameters passed to the step
     }
+    
 
 }

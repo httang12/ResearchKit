@@ -128,8 +128,8 @@ public class ORKConcussionWalkingStepViewController: ORKActiveStepViewController
         }
         
         dispatch_async(dispatch_get_main_queue(), { () -> Void in
-            self.contentView.stepCountLabel.text = "\(numberOfSteps) Steps"
-            let distanceValue = String(format: "%.2f Feets", distance)
+            self.contentView.stepCountLabel.text = "\(Int(numberOfSteps)) Steps"
+            let distanceValue = String(format: "%.2d Feet", Int(distance))
             self.contentView.distanceLabel.text = distanceValue
         })
         
@@ -181,7 +181,27 @@ public class ORKConcussionWalkingStepViewController: ORKActiveStepViewController
         }
     }
     
+    public func showMessage(title:String, message:String, viewController:UIViewController)
+    {
+        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            var alert = UIAlertController(title: NSLocalizedString(title,comment: ""), message: message, preferredStyle: UIAlertControllerStyle.Alert)
+            
+            viewController.presentViewController(alert, animated: true, completion: nil)
+            
+            let delay = 3.0 * Double(NSEC_PER_SEC)
+            var time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+            dispatch_after(time, dispatch_get_main_queue(), {
+                alert.dismissViewControllerAnimated(true, completion: nil)
+                
+            })
+        })
+        
+    }
+    
     public func postNotificationWithMessage(body: String) {
+        
+        showMessage(body, message: "", viewController: self)
+        
         let activeNotifications = UIApplication.sharedApplication().scheduledLocalNotifications
         UIApplication.sharedApplication().cancelAllLocalNotifications()
         for notification in activeNotifications as! [UILocalNotification] {
@@ -282,6 +302,11 @@ public class ORKConcussionWalkingStepViewController: ORKActiveStepViewController
         }
         //  Execute the Query
         self.healthStore.executeQuery(sampleQuery)
+    }
+    
+    //need to invoke this when the app is paused - in background
+    override public func suspend() {
+        
     }
 
 }

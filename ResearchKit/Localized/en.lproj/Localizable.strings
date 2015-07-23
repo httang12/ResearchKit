@@ -64,8 +64,8 @@
 
 /* Consent sharing step */
 "CONSENT_SHARING_TITLE" = "Sharing Options";
-"CONSENT_SHARE_WIDELY_%@" = "Share my data in research databases or registries for future research conducted by NYULMC.";
-"CONSENT_SHARE_ONLY_%@" = "Only share my data with NYULMC in conjunction with the Apple Watch and Concussion research study. ";
+"CONSENT_SHARE_WIDELY_%@" = "Share my data in research databases or registries for future research conducted by NYU Langone Medical Center.";
+"CONSENT_SHARE_ONLY_%@" = "Only share my data with NYU Langone Medical Center in conjunction with the Apple Watch and Concussion research study. ";
 "CONSENT_SHARING_DESCRIPTION_%@" = "%@ will receive your study data from your participation in this study.\n\nSharing your coded study data more broadly (without information such as your name) may benefit this and future research.";
 "LEARN_MORE_CONSENT_SHARING" = "Learn more about data sharing";
 
